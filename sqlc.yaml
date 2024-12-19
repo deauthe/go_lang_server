@@ -1,0 +1,18 @@
+version: "2"
+sql:
+  - schema: "./db/migration/"
+    queries: "./db/query/account.sql"
+    engine: "postgresql"
+    gen:
+      go:
+        package: "db"
+        out: "./db/sqlc/"
+        sql_package: "pgx/v4"
+        emit_json_tags: true
+        emit_prepared_queries: false
+        emit_exact_table_names: true #Accounts -> accounts, Account -> account
+        emit_interface: false
+    database:
+      managed: true
+    rules:
+      - sqlc/db-prepare
